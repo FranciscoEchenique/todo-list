@@ -5,9 +5,9 @@ import { TodoContext } from ".";
 
 export const TodoContextProvider = ({ children }) =>{
 
-    const { todo, setTodo, todos, setTodos } = useTodos();
-    
-    return <TodoContext.Provider value={ { todo, setTodo, todos, setTodos } }>
+    const { todo, setTodo, todos, setTodos, onDeleteTodo } = useTodos();
+
+    return <TodoContext.Provider value={ { todo, setTodo, todos, setTodos, onDeleteTodo } }>
             { children }
         </TodoContext.Provider>
 }

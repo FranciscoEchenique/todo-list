@@ -7,7 +7,7 @@ export const useTodos = () => {
         id: null
       });
     
-    const [todos, setTodos] = useState([]);
+    const [todos, setTodos] = useState( JSON.parse( localStorage.getItem('todos') ) || [] );
 
     const onDeleteTodo = (id) => {
       const newTodoList = todos.filter(todo => todo.id !== id);
@@ -20,6 +20,10 @@ export const useTodos = () => {
         if(!todo.id) return;
         setTodos([...todos, todo]);
       }, [todo]);
+
+    useEffect(() => {
+      localStorage.setItem('todos', JSON.stringify( todos ));
+    }, [todos]);
 
     return {
         todo, 

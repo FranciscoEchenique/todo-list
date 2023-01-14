@@ -1,4 +1,4 @@
-import { useContext, useRef, useState } from "react";
+import { useContext, useEffect, useRef, useState } from "react";
 import { TodoContext } from "../context";
 import toast from "react-hot-toast";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
@@ -13,9 +13,19 @@ export const TodoItem = ({ todo }) => {
   const TodoTitle = useRef();
   const TodoDescription = useRef();
 
-  const onMarkAsCompleted = e => {
+  const onMarkAsCompleted = () => {
     setIsActive(!isActive);
-    
+  }
+
+  const onChangeTodoStatus = () => {
+    if(TodoTitle.current.classList.contains('line-through')){
+      toast.success('Todo marked as pending again');
+    } else {
+      toast.success('Todo marked as completed');
+    }
+  }
+
+  useEffect(() => {
     if(isActive){
       TodoTitle.current.classList.add('line-through');
       TodoDescription.current.classList.add('line-through');
@@ -23,7 +33,7 @@ export const TodoItem = ({ todo }) => {
       TodoTitle.current.classList.remove('line-through');
       TodoDescription.current.classList.remove('line-through');
     }
-  }
+  }, [isActive]);
 
   return (
     <article className='flex flex-row items-center justify-between m-2 bg-slate-50 rounded-xl p-4'>
@@ -37,7 +47,10 @@ export const TodoItem = ({ todo }) => {
           onDeleteTodo(todo.id);
           toast.success('Todo deleted');
            } }><FontAwesomeIcon icon={ faTrash } className='text-red-600 h-6 p-2'/></button>
-        <button onClick={ onMarkAsCompleted }><FontAwesomeIcon icon={ faCheckCircle } className='h-6 p-2 text-emerald-500'/></button>
+        <button onClick={() => {
+          onMarkAsCompleted();
+          onChangeTodoStatus();
+        }}><FontAwesomeIcon icon={ faCheckCircle } className='h-6 p-2 text-emerald-500'/></button>
       </div>
 
     </article>

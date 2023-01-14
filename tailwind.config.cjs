@@ -8,7 +8,8 @@ module.exports = {
       },
       screens: {
         'md': {'max': '780px'},
-        'sm': {'max': '639px'}
+        'sm': {'max': '639px'},
+        'rm': {'max': '500px'}
       }
      },
    },

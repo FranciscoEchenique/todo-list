@@ -38,16 +38,16 @@ export const TodoItem = ({ todo }) => {
   return (
     <article className='flex flex-row items-center justify-between m-2 bg-slate-50 rounded-xl p-4'>
       <div>
-        <h1 ref={ TodoTitle } className='break-all text-3xl font-bold p-2 sm:text-2xl'>{ todo.title }</h1>
-        <p ref={ TodoDescription } className='p-2 break-all'>{ todo.description }</p>
+        <h1 ref={ TodoTitle } className=' break-words text-3xl font-bold p-2 sm:text-2xl'>{ todo.title }</h1>
+        <p ref={ TodoDescription } className='p-2 break-words'>{ todo.description }</p>
       </div>
       
       <div>
-        <button onClick={ () => {
+        <button className='rm:w-[45%]' onClick={ () => {
           onDeleteTodo(todo.id);
           toast.success('Todo deleted');
            } }><FontAwesomeIcon icon={ faTrash } className='text-red-600 h-6 p-2'/></button>
-        <button onClick={() => {
+        <button className='rm:w-[45%]' onClick={() => {
           onMarkAsCompleted();
           onChangeTodoStatus();
         }}><FontAwesomeIcon icon={ faCheckCircle } className='h-6 p-2 text-emerald-500'/></button>
